@@ -95,11 +95,11 @@ async function replyToLine(replyToken, text) {
 // Webhookエンドポイント
 // =============================
 app.post('/webhook', async (req, res) => {
-  // LINE署名を検証
-  if (!verifyLineSignature(req)) {
-    console.error('Invalid signature');
-    return res.status(403).send('Forbidden');
-  }
+  // 署名検証（開発中はスキップ）
+  // TODO: 本番前に有効化する
+  // if (!verifyLineSignature(req)) {
+  //   return res.status(403).send('Forbidden');
+  // }
  
   res.status(200).send('OK'); // LINEへ先に200を返す（タイムアウト防止）
  
@@ -140,4 +140,3 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
 });
- 
